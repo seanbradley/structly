@@ -151,10 +151,10 @@ Same as...
     150
 ```
 
-* Or--for an index or running count--just use enumerate...
+* Or--to simply index a running count--use enumerate...
 ```
-    >>> for lineno, stock in enumerate(portfolio):
-    ...     print(lineno, stock[0])
+    >>> for line_no, stock in enumerate(portfolio):
+    ...     print(line_no, stock[0])
     ... 
     0 AA
     1 IBM
@@ -191,7 +191,7 @@ Same as...
 
 ...or...
 
-* Use a list comprehension, like so...
+* Use initialize a dictionary with values set to zero, like so...
 ```
     >>>portfolio = [
     ...{'name':'AA', 'shares':100, 'price':32.20},
@@ -205,17 +205,21 @@ Same as...
     >>>
     >>> #initialize a dictionary where each item is set to zero...
     >>> shares = { s['name']:0 for s in portfolio }
+    >>>
+    >>> #let's see what this dict looks like...
     >>> shares
     {'IBM': 0, 'CAT': 0, 'GE': 0, 'AA': 0, 'MSFT': 0}
-    >>> for s in portfolio:
-    ...     shares[s['name']] += s['shares']
+    >>>
+    >>> #now, for each stock, lets iteratively add to the value of the name key...
+    >>> for stock in portfolio:
+    ...     shares[stock['name']] += stock['shares']
     >>> shares
     {'IBM': 150, 'CAT': 150, 'GE': 95, 'AA': 100, 'MSFT': 250}
 ```
 
 ...or...
 
-* If you don't need to keep the data (more like a generator), you can use itertools.groupby...
+* If you don't store the data in memory (more like a generator), you can use itertools.groupby...
 ```
     >>> portfolio = [
     ... {'name':'AA', 'shares':100, 'price':32.20},
@@ -256,18 +260,15 @@ Same as...
    
 ...or...
 
-* Use itertools.starmap and zip_longest if wrangling and grouping datasets of unequal length...
+* If wrangling and grouping datasets of unequal length, try using itertools.starmap, and zip_longest...
    
 Notes...
 
-The Python 2 map() will accept None as it’s function argument, where it will just return the object(s) passed in. As this transforms map() into zip(). 
+The Python 2 map() will accept None as it’s function argument, where it will just return the an identity mapping of the passed in. Basically, in Python 2, this transforms map() into zip(). 
 
-In Python 2 map() returns a list while in Python 3 it returns an iterator. 
+More important to note, however: in Python 2 map() returns a list while in Python 3 it returns an iterator. In Python 2 map() will continue until the longest of the argument iterables are exhausted, extending the other arguments with None. In Python 3 map() will instead stop at the shortest of the arguments. So, to fully emulate Python 2's map() function in Python 3, you need to essentially override the Python 3 map() builtin (see below).
 
-In Python 2 map() will continue until the longest of the argument iterables are exhausted, extending the other arguments with None. In Python 3 map() will instead stop at the shortest of the arguments. So, to fully emulate the map() function in Python 3, you need to essentially
-override the builtin (see below).
-
-2to3 will in some cases place a list() call around the call to map() to ensure that the result is still a list. If you need code that runs in both Python 2 and Python 3 without 2to3 conversion and you need the result to be a list, you can try to do the same.
+Python 2 to 3 workarounds will, in some cases, place a list() call around the call to map() to ensure that the result is still a list. If you need code that runs in both Python 2 and Python 3 without importing from past or future, and you need the result to be a list, you can try to do the same.
         
 ```
     names = ['AA', 'IBM', 'MSFT', 'XE', 'MSFT', 'AA', 'AA']
@@ -295,7 +296,7 @@ override the builtin (see below).
 
 * If you'd like to normalize number of elements in a list of values first, try something like...
 
-Note: probably a more elegant way of doing this...perhaps via moving the indicator values into a named tuple, or converting them into a dict with key:value pairs in which every new item is initialized to a value of zero.
+Note: probably a more elegant way of doing this...perhaps via moving the indicator values into a named tuple, or converting them into a dict with key:value pairs in which every new item is initialized to a value of zero. I also leverage itertools.chain in this solution.
 
 ```
     >>> names = ['AA', 'IBM', 'MSFT', 'XE', 'MSFT', 'AA', 'AA']
