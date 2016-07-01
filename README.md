@@ -38,39 +38,39 @@ If you need to filter or query a data, use a list or dictionary _comprehension_.
 
 * List comprehension syntax...
 
-'''
+```
     result = [ <expression> for <name> in <sequence> if <filter/conditional> ]
-'''
+```
 
 Same as...
 
-'''
+```
     result = []
     for name in sequence:
         if condition:
             result.append(expression)
 
-'''
-'''
+```
+```
     >>> data = (1,2,3,4,5)
     >>> result = [ x for x in data if x > 3 ]
     >>> print result
     [4,5]
-'''
+```
 
 * Dictionary comprehension syntax...
-'''
+```
     result = { <key:value> for <key, value> in <sequence> if <filter/conditional> }
-'''
+```
 Same as...
-'''
+```
     result = {}
     for item in dictionary:
         if condition:
             result.update(item)
 
-'''
-'''
+```
+```
     >>> dataset = {
     ... '1':'A', 
     ... '2':'B', 
@@ -82,19 +82,19 @@ Same as...
     >>> result = {k:v for k,v in dataset.items() if k == '4'}
     >>> print(result)
     {'4': 'D'}
-'''
+```
 
 * Filtering data from two sets... (Use zip to create a dictionary!)
-'''
+```
     >>> keys = [1, 2, 3, 4, 5]
     >>> values = ['A', 'B', 'C', 'D', 'E']
     >>> result = { k:v for (k,v) in zip(keys, values) if k > 3}
     >>> print result
     {4: 'D', 5: 'E'}
-'''
+```
 
 * Filtering a record from a pre-existing _list_ of dictionaries...
-'''
+```
     >>> dataset = [
     ... {'id':1, 'data':'Foo'},
     ... {'id':2, 'data':'Bar'},
@@ -105,20 +105,20 @@ Same as...
     >>> results = {record['id']:record for record in dataset}
     >>> print results[1]
     {'data': 'Foo', 'id': 1}
-'''
+```
 
 * Filter unique values by using curly braces in a list comprehension to create a set...
-'''
+```
     >>> data = (1,2,3,4,4,5,5)
     >>> result = { x for x in data if x > 3 }
     >>> print result
     set([4,5])
-'''
+```
 
 ####COUNTING
 
 * If you need to count items in a list, use defaultdict Counter
-'''
+```
     >>> words = ["Foo", "Bar", "Spam", "Ham", "Foo", "Spam", "Foo"]
     >>>
     >>> from collections import Counter
@@ -126,10 +126,10 @@ Same as...
     >>> popular_words = Counter.most_common(2)
     >>> print(popular_words)
     [('Foo', 3), ('Spam', 2)]
-'''
+```
 
 * To sum one kind of element in a list of similar tuples...
-'''
+```
     >>> portfolio = [
     ... ('AA', 100, 32.20),
     ... ('IBM', 50, 91.10),
@@ -149,10 +149,10 @@ Same as...
     Counter({'MSFT': 250, 'CAT': 150, 'IBM': 150, 'AA': 100, 'GE': 95})
     >>> total_shares['IBM']
     150
-'''
+```
 
 * Or--for an index or running count--just use enumerate...
-'''
+```
     >>> for lineno, stock in enumerate(portfolio):
     ...     print(lineno, stock[0])
     ... 
@@ -163,12 +163,12 @@ Same as...
     4 GE
     5 MSFT
     6 IBM
-'''
+```
 
 ####CLUSTERING
 
 * If you need to gather data by similar kind, use defaultdict(list)...
-'''
+```
     rows = [
     {'id':1, 'data':'Foo'},
     {'id':2, 'data':'Bar'},
@@ -187,12 +187,12 @@ Same as...
     {'id': 2, 'data': 'Bar'}
     {'id': 4, 'data': 'Bar'}
     ...
-'''
+```
 
 ...or...
 
 * Use a list comprehension, like so...
-'''
+```
     >>>portfolio = [
     ...{'name':'AA', 'shares':100, 'price':32.20},
     ...{'name':'IBM', 'shares':50, 'price':91.10},
@@ -211,12 +211,12 @@ Same as...
     ...     shares[s['name']] += s['shares']
     >>> shares
     {'IBM': 150, 'CAT': 150, 'GE': 95, 'AA': 100, 'MSFT': 250}
-'''
+```
 
 ...or...
 
 * If you don't need to keep the data (more like a generator), you can use itertools.groupby...
-'''
+```
     >>> portfolio = [
     ... {'name':'AA', 'shares':100, 'price':32.20},
     ... {'name':'IBM', 'shares':50, 'price':91.10},
@@ -252,7 +252,7 @@ Same as...
     MSFT
          {'name': 'MSFT', 'shares': 200, 'price': 51.23}
          {'name': 'MSFT', 'shares': 50, 'price': 65.1}
-'''
+```
    
 ...or...
 
@@ -269,7 +269,7 @@ override the builtin (see below).
 
 2to3 will in some cases place a list() call around the call to map() to ensure that the result is still a list. If you need code that runs in both Python 2 and Python 3 without 2to3 conversion and you need the result to be a list, you can try to do the same.
         
-'''
+```
     names = ['AA', 'IBM', 'MSFT', 'XE', 'MSFT', 'AA', 'AA']
     values = [(100, 201.50), (300, 202.23), (500, 401.02, 15), (333, ), (701, 35), (800,8,8,9)]
 
@@ -291,13 +291,13 @@ override the builtin (see below).
     MSFT (701, 35)
     AA (800, 8, 8, 9)
     AA None
-'''
+```
 
 * If you'd like to normalize number of elements in a list of values first, try something like...
 
 Note: probably a more elegant way of doing this...perhaps via moving the indicator values into a named tuple, or converting them into a dict with key:value pairs in which every new item is initialized to a value of zero.
 
-'''
+```
     >>> names = ['AA', 'IBM', 'MSFT', 'XE', 'MSFT', 'AA', 'AA']
     >>> values = [(100, 201.50), (300, 202.23), (500, 401.02, 15), (333, ), (701, 35), (800,8,8,9)]
     >>>
@@ -342,25 +342,25 @@ Note: probably a more elegant way of doing this...perhaps via moving the indicat
 #####LIST/DICT CONVERSIONS
 
 dict(pair) --> converts list pairs into dictionary
-'''
+```
     >>> data = [('GOOG',490.1), ('AA', 23.15), ('IBM', 91.5)]
     >>> dict(data)
     { 'AA': 23.15, 'IBM': 91.5, 'GOOG': 490.1 }
-'''
+```
 
 list(dict) --> converts a dictionary to a list of key names
-'''
+```
     >>> data = { 'AA': 23.15, 'IBM': 91.5, 'GOOG': 490.1 }
     >>> list(data)
     ['AA', 'IBM', 'GOOG']
-'''
+```
 
 list(dict.items()) --> creates a list of key/value pairs
-'''
+```
     >>> data = { 'AA': 23.15, 'IBM': 91.5, 'GOOG': 490.1 }
     >>> list(data.items())
     [('GOOG',490.1), ('AA', 23.15), ('IBM', 91.5)]
-'''
+```
 
 #####DICTIONARY VIEWS
 
