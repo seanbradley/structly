@@ -338,17 +338,21 @@ Note: probably a more elegant way of doing this...perhaps via moving the indicat
     ('AA', (800, 8, 8, 9))
     ('AA', None)
 >>> 
+```
         
 #####LIST/DICT CONVERSIONS
 
 dict(pair) --> converts list pairs into dictionary
+
 ```
     >>> data = [('GOOG',490.1), ('AA', 23.15), ('IBM', 91.5)]
     >>> dict(data)
     { 'AA': 23.15, 'IBM': 91.5, 'GOOG': 490.1 }
 ```
 
+
 list(dict) --> converts a dictionary to a list of key names
+
 ```
     >>> data = { 'AA': 23.15, 'IBM': 91.5, 'GOOG': 490.1 }
     >>> list(data)
@@ -356,6 +360,7 @@ list(dict) --> converts a dictionary to a list of key names
 ```
 
 list(dict.items()) --> creates a list of key/value pairs
+
 ```
     >>> data = { 'AA': 23.15, 'IBM': 91.5, 'GOOG': 490.1 }
     >>> list(data.items())
