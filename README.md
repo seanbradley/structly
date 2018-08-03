@@ -17,7 +17,7 @@ those dictionaries.
 through the type class.
 
 
-####WHICH CONTAINER/PRIMITIVE SHOULD I USE?
+#### WHICH CONTAINER/PRIMITIVE SHOULD I USE?
 
 Some heuristics...
 
@@ -28,13 +28,13 @@ Some heuristics...
 * If you need a lookup table or an indexed data structure, use a dictionary
 
 
-####DATA MANIPULATION
+#### DATA MANIPULATION
 
-#####FILTERING AND QUERYING DATA...
+##### FILTERING AND QUERYING DATA...
 
 If you need to filter or query a data, use a list or dictionary _comprehension_...
 
-#####EXAMPLES
+##### EXAMPLES
 
 * List comprehension syntax...
 
@@ -115,7 +115,7 @@ Same as...
     set([4,5])
 ```
 
-####COUNTING
+#### COUNTING
 
 * If you need to count items in a list, use defaultdict Counter
 ```
@@ -165,7 +165,7 @@ Same as...
     6 IBM
 ```
 
-####CLUSTERING
+#### CLUSTERING
 
 * If you need to gather data by similar kind, use defaultdict(list)...
 ```
@@ -341,7 +341,7 @@ Note: probably a more elegant way of doing this...perhaps via moving the indicat
 >>> 
 ```
         
-#####LIST/DICT CONVERSIONS
+##### LIST/DICT CONVERSIONS
 
 dict(pair) --> converts list pairs into dictionary
 
@@ -368,7 +368,7 @@ list(dict.items()) --> creates a list of key/value pairs
     [('GOOG',490.1), ('AA', 23.15), ('IBM', 91.5)]
 ```
 
-#####DICTIONARY VIEWS
+##### DICTIONARY VIEWS
 
 Dictionaries can be introspected and teased apart with...
 
@@ -381,7 +381,7 @@ overlays to the view. Updating the original dictionary will update
 the view.
 
 
-##CODE EXAMPLES: CONTENTS OF THIS REPO
+## CODE EXAMPLES: CONTENTS OF THIS REPO
 
 #### structly
 
