@@ -101,7 +101,7 @@ Same as...
     ... {'id':3, 'data':'Spam'}
     ... ]
     >>>
-    >>> #assign the 'id' as the dictionary's key and attach whole record to it.
+    >>> # assign the 'id' as the dictionary's key and attach whole record to it.
     >>> results = {record['id']:record for record in dataset}
     >>> print results[1]
     {'data': 'Foo', 'id': 1}
@@ -203,14 +203,14 @@ Same as...
     ...{'name':'IBM', 'shares':100, 'price':70.44}
     ...]
     >>>
-    >>> #initialize a dictionary where each item is set to zero...
+    >>> # initialize a dictionary where each item is set to zero...
     >>> shares = { s['name']:0 for s in portfolio }
     >>>
     >>> #let's see what this dict looks like...
     >>> shares
     {'IBM': 0, 'CAT': 0, 'GE': 0, 'AA': 0, 'MSFT': 0}
     >>>
-    >>> #now, for each stock, lets iteratively add to the value of the name key...
+    >>> # now, for each stock, lets iteratively add to the value of the name key...
     >>> for stock in portfolio:
     ...     shares[stock['name']] += stock['shares']
     >>> shares
@@ -234,11 +234,11 @@ Same as...
     >>> from operator import itemgetter
     >>> from itertools import groupby
     >>> 
-    >>> #sort by desired field first because
-    >>> #groupby only sorts consecutive items
+    >>> # sort by desired field first because
+    >>> # groupby only sorts consecutive items
     ... portfolio.sort(key=itemgetter('name'))
     >>> 
-    >>> #iterate in groups
+    >>> # iterate in groups
     ... for name, items in groupby(portfolio, key=itemgetter('name')):
     ...     print(name)
     ...     for i in items:
@@ -303,16 +303,16 @@ Note: probably a more elegant way of doing this...perhaps via moving the indicat
     >>> values = [(100, 201.50), (300, 202.23), (500, 401.02, 15), (333, ), (701, 35), (800,8,8,9)]
     >>>
     >>> from itertools import zip_longest, chain
-    >>> #collect elements of a tuple into a fixed-length chunk;
-    ... #initialize each new or added element to a fillvalue of 'x'
-    ... #like so....
-    ... #grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
+    >>> # collect elements of a tuple into a fixed-length chunk;
+    ... # initialize each new or added element to a fillvalue of 'x'
+    ... # like so....
+    ... # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
     ... def grouper(tup, n, fillvalue=None):
     ...     args = [iter(tup)] * n
     ...     group = zip_longest(*args, fillvalue=fillvalue)
     ...     return group
     ... 
-    >>> #iterate through the list of tuples, and manage each with the grouper
+    >>> # iterate through the list of tuples, and manage each with the grouper
     ... def normalized(values):
     ...     normalized = []
     ...     for tup in values:
@@ -320,14 +320,14 @@ Note: probably a more elegant way of doing this...perhaps via moving the indicat
     ...         normalized.append(normed_tup)
     ...     return normalized
     ... 
-    >>> #flatten the resulting list of lists by one level of nesting
+    >>> # flatten the resulting list of lists by one level of nesting
     ... def flatten(normalized):
     ...     return chain.from_iterable(normalized)
     ... 
-    >>> #the above returns an itertools object, so need to list-ify
+    >>> # the above returns an itertools object, so need to list-ify
     ... normed_list = list(flatten(normalized(values)))
     >>> 
-    >>> #zip together the stock names and their associated indicator values
+    >>> # zip together the stock names and their associated indicator values
     ... for stock in zip_longest(names, normed_list): 
     ...     print(stock)
     ... 
